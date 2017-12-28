@@ -1,0 +1,29 @@
+version: 2
+jobs:
+   build:
+     working_directory: ~/promptio
+     docker:
+      - image: circleci/node:8.9.3-browsers
+     steps:
+      - checkout
+      - run: 
+          name: npm install
+          command: npm install
+          working_directory: ~/promptio
+      - run:
+          name: run tests
+          command: ./node_modules/.bin/ng test --single-run
+          working_directory: ~/promptio
+      - store_test_results:
+          path: ~/promptio/junit
+      - store_artifacts:
+          path: ~/promptio/junit
+      - run:
+          name: build
+          command: ./node_modules/.bin/ng build --prod
+          working_directory: ~/promptio
+      - deploy:
+          name: deploy to firebase
+          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN --non-interactive
+          working_directory: ~/promptio
+       
