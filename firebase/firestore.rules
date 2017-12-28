@@ -1,7 +1,42 @@
+// https://firebase.google.com/docs/firestore/solutions/role-based-access
+
 service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if false;
-    }
-  }
+   match /databases/{database}/documents {
+     match /prompts/{prompt} {
+        function isSignedIn() {
+          return request.auth != null;
+        }
+
+        function getRole() {
+          return value(/databases/$(database)/documents/prompts/$(prompt)).roles[request.auth.uid];
+        }
+
+        function isOneOfRoles(array) {
+          return isSignedIn() && (getRole() in array);
+        }
+
+        function isValidNewPrompt() {
+          return !exists(/databases/$(database)/documents/prompts/$(prompt))
+            && request.resource.data.roles[request.auth.uid] == 'owner';
+        }
+
+        function onlyContentChanged() {
+          // Ensure that title and roles are unchanged and that no new
+          // fields are added to the document.
+          return request.resource.data.title == resource.data.title
+            && request.resource.data.roles == resource.data.roles
+            && request.resource.size() == resource.size();
+        }
+
+        // Split writing into creation, deletion, and updating. Only an
+        // owner can create or delete a prompt but a writer can update
+        // prompt content.
+        allow create: if isValidNewPrompt();
+        allow delete: if isOneOfRoles(['owner']);
+        allow update: if isOneOfRoles(['owner'])
+                      || (isOneOfRoles(['writer']) && onlyContentChanged());
+        allow read: if isOneOfRoles(['owner', 'writer', 'reader']);
+
+     }
+   }
 }
