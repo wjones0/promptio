@@ -38,5 +38,8 @@ service cloud.firestore {
         allow read: if isOneOfRoles(['owner', 'writer', 'reader']);
 
      }
-   }
+     match /sessions/{session} {
+    	allow read, write: if true;
+    }
+  }
 }
