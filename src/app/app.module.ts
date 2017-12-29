@@ -8,6 +8,11 @@ import {
   MatToolbarModule
 } from '@angular/material';
 
+// angularfire things
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
 // ngrx things
 import { StoreModule, MetaReducer } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -31,6 +36,9 @@ export const metaReducers: MetaReducer<any>[] = [];
     BrowserModule,
     BrowserAnimationsModule,
     MatToolbarModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
     StoreModule.forRoot({}, { metaReducers }),
     EffectsModule.forRoot([]),
     environment.production ? [] : StoreDevtoolsModule.instrument(),
