@@ -27,10 +27,12 @@ export function reducer(state = initialState, action: AuthActions.AuthAction): A
         }
 
         case AuthActions.LOGIN_SUCCESS: {
+            const user = action.payload;
             return {
                 ...state,
                 loggedIn: true,
-                loggingIn: false
+                loggingIn: false,
+                user
             }
         }
 

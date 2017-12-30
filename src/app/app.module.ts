@@ -29,7 +29,7 @@ import { AppComponent } from './app.component';
 import { PromptCommonModule } from './prompt-common/prompt-common.module';
 
 // app ngrx things
-import { reducers } from './store';
+import { reducers, effects } from './store';
 export const metaReducers: MetaReducer<any>[] = [];
 
 @NgModule({
@@ -45,7 +45,7 @@ export const metaReducers: MetaReducer<any>[] = [];
     AngularFirestoreModule,
     AngularFireAuthModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot(effects),
     environment.production ? [] : StoreDevtoolsModule.instrument(),
     AppRoutingModule,
     PromptCommonModule

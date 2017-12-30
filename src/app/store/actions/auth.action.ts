@@ -14,12 +14,12 @@ export class AuthLogin implements Action {
 
 export class AuthLoginSuccess implements Action {
     readonly type = LOGIN_SUCCESS;
-    constructor(payload: User) { }
+    constructor(public payload: User) { }
 }
 
 export class AuthLoginFailure implements Action {
     readonly type = LOGIN_FAILURE;
-    constructor(payload: any) { }
+    constructor(public payload: any) { }
 }
 
 // action type
