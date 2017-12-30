@@ -8,7 +8,12 @@
     "types": [
       "jasmine",
       "node"
-    ]
+    ],
+    "paths": {
+      "@rootStore": [
+        "app/store"
+      ]
+    }
   },
   "files": [
     "test.ts"

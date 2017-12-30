@@ -1,5 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import {
+  MatButtonModule,
+  MatIconModule,
+  MatToolbarModule,
+} from '@angular/material';
+
+import { StoreModule } from '@ngrx/store';
+import * as fromRootStore from '@rootStore';
+
 import { TopnavComponent } from './topnav.component';
 
 describe('TopnavComponent', () => {
@@ -8,9 +17,17 @@ describe('TopnavComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TopnavComponent ]
+      imports: [
+        MatButtonModule,
+        MatIconModule,
+        MatToolbarModule,
+        StoreModule.forRoot(fromRootStore.reducers),
+      ],
+      declarations: [
+        TopnavComponent
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

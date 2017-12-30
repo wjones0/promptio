@@ -1,5 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { StoreModule } from '@ngrx/store';
+import * as fromRootStore from '@rootStore';
+
+import { PromptCommonModule } from '../../prompt-common/prompt-common.module';
 import { PromptListComponent } from './prompt-list.component';
 
 describe('PromptListComponent', () => {
@@ -8,9 +12,15 @@ describe('PromptListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PromptListComponent ]
+      imports: [
+        PromptCommonModule,
+        StoreModule.forRoot(fromRootStore.reducers),
+      ],
+      declarations: [
+        PromptListComponent
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
