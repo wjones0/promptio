@@ -1,4 +1,4 @@
-import { ActionReducerMap } from '@ngrx/store';
+import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
 
 import * as fromAuth from './auth.reducer';
 
@@ -10,3 +10,4 @@ export const reducers: ActionReducerMap<AppState> = {
     auth: fromAuth.reducer
 };
 
+export const selectAuth = (state: AppState): fromAuth.AuthState => state.auth;

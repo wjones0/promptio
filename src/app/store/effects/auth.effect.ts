@@ -36,4 +36,21 @@ export class AuthEffects {
         })
         );
 
+
+    @Effect()
+    checkLogIn$ = this._actions$.ofType(authActions.CHECK_LOGIN)
+        .pipe(
+        switchMap(() => this._afAuth.authState),
+        map((authData) => {
+            if (authData) {
+                return new authActions.AuthLoginSuccess({
+                    authID: authData.uid,
+                    displayName: authData.displayName
+                });
+            }
+            else {
+                return of(new authActions.AuthLoginFailure('not logged in'));
+            }
+        })
+        );
 }

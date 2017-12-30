@@ -43,7 +43,20 @@ export function reducer(state = initialState, action: AuthActions.AuthAction): A
                 loggingIn: false
             }
         }
+
+        case AuthActions.CHECK_LOGIN: {
+            return {
+                ...state,
+                loggedIn: false,
+                loggingIn: false
+            }
+        }
     }
 
     return state;
 }
+
+
+export const getUser = (state: AuthState): User => state.user;
+export const isLoggedIn = (state: AuthState): boolean => state.loggedIn;
+export const isLoggingIn = (state: AuthState): boolean => state.loggingIn;

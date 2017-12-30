@@ -3,3 +3,6 @@
         <mat-icon color="warn">person</mat-icon>
     </button>
 </mat-toolbar>
+<div *ngIf="user$ | async; let user">user name: {{user.displayName}}</div>
+<div *ngIf="loggedIn$ | async; let li">logged in: {{li}}</div>
+<div *ngIf="loggingIn$ | async; let login">logging in: {{login}}</div>
