@@ -26,6 +26,7 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
+import { PromptCommonModule } from './prompt-common/prompt-common.module';
 
 // app ngrx things
 import { reducers } from './store';
@@ -46,7 +47,8 @@ export const metaReducers: MetaReducer<any>[] = [];
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([]),
     environment.production ? [] : StoreDevtoolsModule.instrument(),
-    AppRoutingModule
+    AppRoutingModule,
+    PromptCommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
