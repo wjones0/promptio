@@ -17,6 +17,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 // ngrx things
 import { StoreModule, MetaReducer } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 
 // not used in production
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -30,6 +31,7 @@ import { PromptCommonModule } from './prompt-common/prompt-common.module';
 
 // app ngrx things
 import { reducers, effects } from './store';
+import { CustomSerializer } from './store/reducers/router.reducer';
 export const metaReducers: MetaReducer<any>[] = [];
 
 @NgModule({
@@ -46,11 +48,14 @@ export const metaReducers: MetaReducer<any>[] = [];
     AngularFireAuthModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(effects),
+    StoreRouterConnectingModule,
     environment.production ? [] : StoreDevtoolsModule.instrument(),
     AppRoutingModule,
     PromptCommonModule
   ],
-  providers: [],
+  providers: [
+    { provide: RouterStateSerializer, useClass: CustomSerializer }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

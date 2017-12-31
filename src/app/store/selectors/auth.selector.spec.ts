@@ -37,7 +37,7 @@ describe('Auth Selectors', () => {
                 result = value;
             });
 
-        expect(result).toBeNull;
+        expect(result).toBeNull();
 
         store.dispatch(new fromActions.AuthLoginSuccess(user));
 

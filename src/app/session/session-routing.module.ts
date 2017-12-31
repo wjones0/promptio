@@ -4,7 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { SessionComponent } from './session/session.component';
 
 const routes: Routes = [
-  { path: '', component: SessionComponent }
+  { path: '', component: SessionComponent },
+  { path: ':sessionID', component: SessionComponent }
 ];
 
 @NgModule({
