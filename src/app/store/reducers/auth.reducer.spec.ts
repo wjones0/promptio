@@ -2,7 +2,7 @@
 import * as fromAuth from './auth.reducer';
 import * as fromActions from '../actions/auth.action';
 
-import { User } from '../../models/user';
+import { User } from '@models/user';
 
 describe('Auth Reducers', () => {
     it('should return the initial state with undefined action', () => {

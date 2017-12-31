@@ -12,6 +12,9 @@
     "paths": {
       "@rootStore": [
         "app/store"
+      ],
+      "@models/*": [
+        "app/models/*"
       ]
     }
   },

@@ -6,7 +6,7 @@ import * as fromReducers from '../reducers';
 import * as fromActions from '../actions';
 import * as fromSelectors from '../selectors';
 
-import { User } from '../../models/user';
+import { User } from '@models/user';
 
 describe('Auth Selectors', () => {
     let store: Store<fromReducers.AppState>;

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import * as fromRootStore from '@rootStore';
 
-import { User } from '../../../models/user';
+import { User } from '@models/user';
 
 @Component({
   selector: 'pro-topnav',

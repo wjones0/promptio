@@ -1,6 +1,6 @@
 
 import * as fromAuth from './auth.action';
-import { User } from '../../models/user';
+import { User } from '@models/user';
 
 describe('Auth Actions', () => {
     describe('Logging In Actions', () => {

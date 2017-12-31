@@ -11,7 +11,7 @@ import { Effect, Actions } from '@ngrx/effects';
 
 import * as authActions from '../actions/auth.action';
 
-import { User } from '../../models/user';
+import { User } from '@models/user';
 
 @Injectable()
 export class AuthEffects {
