@@ -1,8 +1,18 @@
 <mat-toolbar color="primary">
+    <button *ngIf="loggedIn$ | async; else loginbutton" mat-button [matMenuTriggerFor]="appMenu">
+        <mat-icon color="accent">person</mat-icon>
+    </button>
+</mat-toolbar>
+
+<ng-template #loginbutton>
     <button mat-button (click)="login()">
         <mat-icon color="warn">person</mat-icon>
     </button>
-</mat-toolbar>
-<div *ngIf="user$ | async; let user">user name: {{user.displayName}}</div>
-<div *ngIf="loggedIn$ | async; let li">logged in: {{li}}</div>
-<div *ngIf="loggingIn$ | async; let login">logging in: {{login}}</div>
+</ng-template>
+
+<mat-menu #appMenu="matMenu">
+    <button mat-menu-item (click)="logout()">
+        <mat-icon>power_settings_new</mat-icon>
+        Logout
+    </button>
+</mat-menu>

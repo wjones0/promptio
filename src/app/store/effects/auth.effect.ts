@@ -32,7 +32,7 @@ export class AuthEffects {
                 catchError(error => {
                     return of(new authActions.AuthLoginFailure(error));
                 })
-                )
+                );
         })
         );
 
@@ -47,10 +47,28 @@ export class AuthEffects {
                     authID: authData.uid,
                     displayName: authData.displayName
                 });
+            } else {
+                return new authActions.AuthLoginFailure('not logged in');
             }
-            else {
-                return of(new authActions.AuthLoginFailure('not logged in'));
-            }
+        }),
+        catchError(error => {
+            return of(new authActions.AuthLoginFailure('not logged in'));
+        })
+        );
+
+    @Effect()
+    logOut$ = this._actions$.ofType(authActions.LOGOUT)
+        .pipe(
+        switchMap(() => {
+            return Observable.fromPromise(this._afAuth.auth.signOut())
+                .pipe(
+                map(() => {
+                    return new authActions.AuthLogoutSuccess();
+                }),
+                catchError(error => {
+                    return of(new authActions.AuthLogoutFailure(error));
+                })
+                );
         })
         );
 }

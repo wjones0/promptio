@@ -3,6 +3,7 @@ import * as fromAuth from './auth.reducer';
 import * as fromActions from '../actions/auth.action';
 
 import { User } from '@models/user';
+import { AuthState } from './auth.reducer';
 
 describe('Auth Reducers', () => {
     it('should return the initial state with undefined action', () => {
@@ -63,6 +64,59 @@ describe('Auth Reducers', () => {
         });
     });
 
+    describe('Logout Reducers', () => {
+        it('should preserve state on logout action', () => {
+            const user: User = { authID: 'anyauthid', displayName: 'nameus' };
+            const action = new fromActions.AuthLogout();
+
+            const previousState: AuthState = {
+                loggedIn: true,
+                loggingIn: false,
+                user
+            };
+
+            const state = fromAuth.reducer(previousState, action);
+
+            expect(state.loggedIn).toBe(true, 'logged in');
+            expect(state.loggingIn).toBe(false, 'logging in');
+            expect(state.user).toEqual(user);
+        });
+
+        it('should preserve state on logout failure action', () => {
+            const user: User = { authID: 'anyauthid', displayName: 'nameus' };
+            const action = new fromActions.AuthLogoutFailure({ message: 'failure' });
+
+            const previousState: AuthState = {
+                loggedIn: true,
+                loggingIn: false,
+                user
+            };
+
+            const state = fromAuth.reducer(previousState, action);
+
+            expect(state.loggedIn).toBe(true, 'logged in');
+            expect(state.loggingIn).toBe(false, 'logging in');
+            expect(state.user).toEqual(user);
+        });
+
+        it('should have proper state on logout success action', () => {
+            const user: User = { authID: 'anyauthid', displayName: 'nameus' };
+            const action = new fromActions.AuthLogoutSuccess();
+
+            const previousState: AuthState = {
+                loggedIn: true,
+                loggingIn: false,
+                user
+            };
+
+            const state = fromAuth.reducer(previousState, action);
+
+            expect(state.loggedIn).toBe(false, 'logged in');
+            expect(state.loggingIn).toBe(false, 'logging in');
+            expect(state.user).toBeNull();
+        });
+    });
+
     describe('Reducer Selector Functions', () => {
         it('isloggedin should return .loggedin', () => {
             const { initialState } = fromAuth;
@@ -89,4 +143,5 @@ describe('Auth Reducers', () => {
             expect(slice).toEqual(user);
         });
     });
-})
+
+});

@@ -46,4 +46,33 @@ describe('Auth Actions', () => {
             });
         });
     });
+
+    describe('Logout Actions', () => {
+        it('should create a logout action', () => {
+            const action = new fromAuth.AuthLogout();
+
+            expect({ ...action }).toEqual({
+                type: fromAuth.LOGOUT
+            });
+        });
+
+        it('should create a logout success action', () => {
+            const action = new fromAuth.AuthLogoutSuccess();
+
+            expect({ ...action }).toEqual({
+                type: fromAuth.LOGOUT_SUCCESS
+            });
+        });
+
+        it('should create a logout failure action', () => {
+            const payload = { message: 'fail' };
+            const action = new fromAuth.AuthLogoutFailure(payload);
+
+            expect({ ...action }).toEqual({
+                type: fromAuth.LOGOUT_FAILURE,
+                payload
+            });
+        });
+    });
+
 });

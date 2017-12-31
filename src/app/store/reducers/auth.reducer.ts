@@ -12,7 +12,7 @@ export const initialState: AuthState = {
     user: null,
     loggedIn: false,
     loggingIn: false
-}
+};
 
 
 export function reducer(state = initialState, action: AuthActions.AuthAction): AuthState {
@@ -23,7 +23,7 @@ export function reducer(state = initialState, action: AuthActions.AuthAction): A
                 ...state,
                 loggedIn: false,
                 loggingIn: true
-            }
+            };
         }
 
         case AuthActions.LOGIN_SUCCESS: {
@@ -33,7 +33,7 @@ export function reducer(state = initialState, action: AuthActions.AuthAction): A
                 loggedIn: true,
                 loggingIn: false,
                 user
-            }
+            };
         }
 
         case AuthActions.LOGIN_FAILURE: {
@@ -41,7 +41,7 @@ export function reducer(state = initialState, action: AuthActions.AuthAction): A
                 ...state,
                 loggedIn: false,
                 loggingIn: false
-            }
+            };
         }
 
         case AuthActions.CHECK_LOGIN: {
@@ -49,8 +49,30 @@ export function reducer(state = initialState, action: AuthActions.AuthAction): A
                 ...state,
                 loggedIn: false,
                 loggingIn: false
-            }
+            };
         }
+
+        case AuthActions.LOGOUT: {
+            return {
+                ...state
+            };
+        }
+
+        case AuthActions.LOGOUT_SUCCESS: {
+            return {
+                ...state,
+                user: null,
+                loggedIn: false,
+                loggingIn: false
+            };
+        }
+
+        case AuthActions.LOGOUT_FAILURE: {
+            return {
+                ...state
+            };
+        }
+
     }
 
     return state;

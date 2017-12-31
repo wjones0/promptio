@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   MatButtonModule,
   MatIconModule,
+  MatMenuModule,
   MatToolbarModule,
 } from '@angular/material';
 
@@ -20,6 +21,7 @@ describe('TopnavComponent', () => {
       imports: [
         MatButtonModule,
         MatIconModule,
+        MatMenuModule,
         MatToolbarModule,
         StoreModule.forRoot(fromRootStore.reducers),
       ],

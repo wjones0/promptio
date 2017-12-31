@@ -8,6 +8,10 @@ export const LOGIN_SUCCESS = '[Auth] Login Success';
 export const LOGIN_FAILURE = '[Auth] Login Failure';
 export const CHECK_LOGIN = '[Auth] Check Login';
 
+export const LOGOUT = '[Auth] Logout';
+export const LOGOUT_SUCCESS = '[Auth] Logout Success';
+export const LOGOUT_FAILURE = '[Auth] Logout Failure';
+
 
 export class AuthLogin implements Action {
     readonly type = LOGIN;
@@ -27,5 +31,24 @@ export class AuthCheckLogin implements Action {
     readonly type = CHECK_LOGIN;
 }
 
+export class AuthLogout implements Action {
+    readonly type = LOGOUT;
+}
+
+export class AuthLogoutSuccess implements Action {
+    readonly type = LOGOUT_SUCCESS;
+}
+
+export class AuthLogoutFailure implements Action {
+    readonly type = LOGOUT_FAILURE;
+    constructor(public payload: any) { }
+}
+
 // action type
-export type AuthAction = AuthLogin | AuthLoginSuccess | AuthLoginFailure | AuthCheckLogin;
+export type AuthAction = AuthLogin
+    | AuthLoginSuccess
+    | AuthLoginFailure
+    | AuthCheckLogin
+    | AuthLogout
+    | AuthLogoutSuccess
+    | AuthLogoutFailure;
