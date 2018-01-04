@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import * as fromRoot from '@rootStore';
+import * as fromPrompts from '../store';
+import { fromPromise } from 'rxjs/observable/fromPromise';
 
 @Component({
   selector: 'pro-prompt-list',
@@ -10,14 +11,15 @@ import * as fromRoot from '@rootStore';
 })
 export class PromptListComponent implements OnInit {
 
-  constructor(private _store: Store<fromRoot.AppState>) { }
+  testData: any;
+
+  constructor(private _store: Store<fromPrompts.PromptModuleState>) { }
 
   ngOnInit() {
+    this.testData = this._store.select(fromPrompts.selectEntities);
   }
 
   go() {
-    this._store.dispatch(new fromRoot.Go({
-      path: ['/author', '1']
-    }));
+    this._store.dispatch(new fromPrompts.GetPrompts());
   }
 }
