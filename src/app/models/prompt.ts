@@ -2,5 +2,5 @@ export interface Prompt {
     id: string;
     title: string;
     content: string;
-    roles: [any];
+    roles: {};
 }

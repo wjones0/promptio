@@ -20,6 +20,10 @@ export function reducer(state = initialState, action: PromptActions.PromptAction
             };
         }
 
+        case (PromptActions.PROMPT_ADDED): {
+            return promptAdapter.addOne(action.payload, state);
+        }
+
         default:
             return state;
     }

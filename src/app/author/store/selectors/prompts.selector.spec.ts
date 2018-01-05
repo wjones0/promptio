@@ -7,7 +7,7 @@ import * as fromActions from '../actions';
 import * as fromSelectors from '../selectors';
 import * as fromPromptReducers from '../reducers/prompts.reducer';
 
-import { User } from '@models/user';
+import { Prompt } from '@models/prompt';
 
 describe('Prompt Selectors', () => {
     let store: Store<fromReducers.PromptModuleState>;
@@ -38,7 +38,31 @@ describe('Prompt Selectors', () => {
 
         expect(result).toEqual({});
 
-        // future - add something and then test it again
+        const prompt: Prompt = {
+            content: 'some content',
+            id: 'thisistheid',
+            roles: {
+                someuserid: 'owner'
+            },
+            title: 'great thing'
+        };
+
+        const prompt2: Prompt = {
+            content: 'some other content',
+            id: 'thisistheotherid',
+            roles: {
+                someuserid2: 'owner'
+            },
+            title: 'greater thing'
+        };
+
+        const action = new fromActions.PromptAdded(prompt);
+        store.dispatch(action);
+
+        const action2 = new fromActions.PromptAdded(prompt2);
+        store.dispatch(action2);
+
+        expect(result).toEqual({ thisistheid: { ...prompt }, thisistheotherid: { ...prompt2 } });
     });
 
     it('should have an array selector', () => {
@@ -52,7 +76,31 @@ describe('Prompt Selectors', () => {
 
         expect(result).toEqual([]);
 
-        // future - add something and then test it again
+        const prompt: Prompt = {
+            content: 'some content',
+            id: 'thisistheid',
+            roles: {
+                someuserid: 'owner'
+            },
+            title: 'great thing'
+        };
+
+        const prompt2: Prompt = {
+            content: 'some other content',
+            id: 'thisistheotherid',
+            roles: {
+                someuserid2: 'owner'
+            },
+            title: 'greater thing'
+        };
+
+        const action = new fromActions.PromptAdded(prompt);
+        store.dispatch(action);
+
+        const action2 = new fromActions.PromptAdded(prompt2);
+        store.dispatch(action2);
+
+        expect(result).toEqual([prompt, prompt2]);
     });
 
 });
