@@ -1,0 +1,6 @@
+<pro-topnav></pro-topnav>
+
+<div *ngIf="thePrompt$ | async; let p">
+  <p>{{p.title}}</p>
+  <p>{{p.content}}</p>
+</div>

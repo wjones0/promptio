@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
+import { tap } from 'rxjs/operators';
 
 import { Store } from '@ngrx/store';
 import * as fromRootStore from '@rootStore';
@@ -19,8 +20,13 @@ export class TopnavComponent implements OnInit {
   constructor(private _store: Store<fromRootStore.AppState>) { }
 
   ngOnInit() {
-    this._store.dispatch(new fromRootStore.AuthCheckLogin());
-    this.loggedIn$ = this._store.select(fromRootStore.selectLoggedIn);
+    this.loggedIn$ = this._store.select(fromRootStore.selectLoggedIn).pipe(
+      tap(loggedIn => {
+        if (!loggedIn) {
+          this._store.dispatch(new fromRootStore.AuthCheckLogin());
+        }
+      }
+      ));
   }
 
   login() {

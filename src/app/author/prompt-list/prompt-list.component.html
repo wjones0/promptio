@@ -1,5 +1,5 @@
 <pro-topnav></pro-topnav>
 
-<button (click)="go()">GOO</button>
-
-{{testData | async | json}}
+<mat-card *ngFor="let p of prompts$ | async" (click)="goTo(p)">
+    <mat-card-title>{{p.title}}</mat-card-title>
+</mat-card>

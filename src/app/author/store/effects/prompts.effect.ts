@@ -10,6 +10,7 @@ import { switchMap, map, mergeMap, merge } from 'rxjs/operators';
 import { AngularFirestore } from 'angularfire2/firestore';
 
 import * as fromRoot from '@rootStore';
+import * as fromPrompts from '../';
 import * as PromptActions from '../actions/prompts.action';
 
 import { Prompt } from '@models/prompt';
