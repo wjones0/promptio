@@ -2,19 +2,19 @@
 
 service cloud.firestore {
    match /databases/{database}/documents {
+      function isSignedIn() {
+        return request.auth != null;
+      }
+
+      function getRole() {
+        return resource.data.roles[request.auth.uid];
+      }
+
+      function isOneOfRoles(array) {
+        return isSignedIn() && (getRole() in array);
+      }
+
      match /prompts/{prompt} {
-        function isSignedIn() {
-          return request.auth != null;
-        }
-
-        function getRole() {
-          return resource.data.roles[request.auth.uid];
-        }
-
-        function isOneOfRoles(array) {
-          return isSignedIn() && (getRole() in array);
-        }
-
         function isValidNewPrompt() {
           return !exists(/databases/$(database)/documents/prompts/$(prompt))
             && request.resource.data.roles[request.auth.uid] == 'owner';
@@ -39,7 +39,18 @@ service cloud.firestore {
 
      }
      match /sessions/{session} {
-    	allow read, write: if true;
+      function isValidNewSession() {
+        return !exists(/databases/$(database)/documents/session/$(session))
+          && request.resource.data.roles[request.auth.uid] == 'owner';
+      }
+
+      allow create: if isValidNewSession();
+      allow delete: if isOneOfRoles(['owner']);
+      allow get: if true;
+    }
+    
+    match /users/{userId}/sessions/{document=**} {
+    	allow read, write: if request.auth.uid == userId;
     }
   }
 }

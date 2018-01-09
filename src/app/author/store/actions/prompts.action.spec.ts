@@ -23,6 +23,7 @@ describe('Prompt Actions', () => {
 
         const action = new fromPrompts.PromptAdded(prompt);
 
+        expect(action.type).toEqual(fromPrompts.PROMPT_ADDED);
         expect(action.payload).toEqual(prompt);
     });
 });

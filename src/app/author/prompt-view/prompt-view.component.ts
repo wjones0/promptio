@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
+import { first } from 'rxjs/operators';
 
 import { Store } from '@ngrx/store';
 
@@ -22,6 +23,14 @@ export class PromptViewComponent implements OnInit {
 
   ngOnInit() {
     this.thePrompt$ = this._store.select(fromPrompts.selectSelectedPrompt);
+  }
+
+  createSession() {
+    this.thePrompt$.pipe(
+      first()
+    ).subscribe((prompt) => {
+      this._store.dispatch(new fromPrompts.CreateSession(prompt.id));
+    });
   }
 
 }

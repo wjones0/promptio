@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
+  MatButtonModule,
   MatCardModule
 } from '@angular/material';
 
@@ -19,6 +20,7 @@ import { PromptViewComponent } from './prompt-view/prompt-view.component';
 @NgModule({
   imports: [
     CommonModule,
+    MatButtonModule,
     MatCardModule,
     StoreModule.forFeature('promptModule', reducers),
     EffectsModule.forFeature(effects),
