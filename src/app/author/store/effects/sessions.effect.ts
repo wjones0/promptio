@@ -13,7 +13,7 @@ import * as fromRoot from '@rootStore';
 import * as PromptSessionActions from '../actions/sessions.action';
 
 import { Session } from '@models/session';
-import { UserSession } from '@models/userSession';
+import { UserSession } from '@models/usersession';
 
 @Injectable()
 export class SessionEffects {
