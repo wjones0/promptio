@@ -21,5 +21,4 @@ describe('PromptSessions Reducer', () => {
         expect(state).toEqual(initialState);
     });
 
-
 });
