@@ -13,6 +13,8 @@ import { reducers, effects } from './store';
 
 import { PromptCommonModule } from '../prompt-common/prompt-common.module';
 
+import { PromptService, SessionService, UserSessionService } from './services';
+
 import { AuthorRoutingModule } from './author-routing.module';
 import { PromptListComponent } from './prompt-list/prompt-list.component';
 import { PromptViewComponent } from './prompt-view/prompt-view.component';
@@ -27,6 +29,11 @@ import { PromptViewComponent } from './prompt-view/prompt-view.component';
     PromptCommonModule,
     AuthorRoutingModule
   ],
-  declarations: [PromptListComponent, PromptViewComponent]
+  declarations: [PromptListComponent, PromptViewComponent],
+  providers: [
+    PromptService,
+    SessionService,
+    UserSessionService,
+  ]
 })
 export class AuthorModule { }
