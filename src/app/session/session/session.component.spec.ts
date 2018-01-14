@@ -1,5 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { StoreModule } from '@ngrx/store';
+
+import * as fromRoot from '@rootStore';
+import * as fromSessions from '../store';
+
+import { PromptCommonModule } from '../../prompt-common/prompt-common.module';
+
 import { SessionComponent } from './session.component';
 
 describe('SessionComponent', () => {
@@ -8,9 +15,16 @@ describe('SessionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SessionComponent ]
+      imports: [
+        PromptCommonModule,
+        StoreModule.forRoot(fromRoot.reducers),
+        StoreModule.forFeature('sessionModule', { ...fromSessions.reducers }),
+      ],
+      declarations: [
+        SessionComponent
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -31,7 +31,7 @@ describe('Session Selectors', () => {
         let result;
 
         store
-            .select(fromSelectors.SelectSessionState)
+            .select(fromSelectors.selectSessionState)
             .subscribe((value) => {
                 result = value;
             });
@@ -57,7 +57,7 @@ describe('Session Selectors', () => {
         let result;
 
         store
-            .select(fromSelectors.SelectCurrentSession)
+            .select(fromSelectors.selectCurrentSession)
             .subscribe((value) => {
                 result = value;
             });

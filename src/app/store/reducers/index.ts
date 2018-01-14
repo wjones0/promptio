@@ -14,6 +14,7 @@ export const reducers: ActionReducerMap<AppState> = {
     router: fromNGRXRouter.routerReducer
 };
 
+export { RouterStateUrl } from './router.reducer';
 export const selectAuth = (state: AppState): fromAuth.AuthState => state.auth;
 export const selectRouter = (state: AppState): fromNGRXRouter.RouterReducerState<fromRouter.RouterStateUrl> => state.router;
 

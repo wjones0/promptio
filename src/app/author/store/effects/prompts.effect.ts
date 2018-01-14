@@ -10,41 +10,34 @@ import { switchMap, map, mergeMap, merge } from 'rxjs/operators';
 import { AngularFirestore } from 'angularfire2/firestore';
 
 import * as fromRoot from '@rootStore';
-import * as fromPrompts from '../';
 import * as PromptActions from '../actions/prompts.action';
 
 import { Prompt } from '@models/prompt';
-
+import { User } from '@models/user';
 
 @Injectable()
 export class PromptEffects {
 
-    private _userID: string;
-
-    constructor(private _actions$: Actions, private _afStore: AngularFirestore, private _store: Store<fromRoot.AppState>) {
-        this._store.select(fromRoot.selectUser).subscribe((user) => {
-            if (user) {
-                this._userID = user.authID;
-            }
-        });
-    }
+    constructor(private _actions$: Actions, private _afStore: AngularFirestore, private _store: Store<fromRoot.AppState>) { }
 
     // Getting all the prompts from firestore
     @Effect()
     query$: Observable<Action> = this._actions$.ofType(PromptActions.GET_PROMPTS).pipe(
-        switchMap(action => {
+        switchMap(action => this._store.select(fromRoot.selectUser)),
+        map((user: User) => user.authID),
+        switchMap((userID: string) => {
             return this._afStore.collection<Prompt>('prompts',
-                ref => ref.where(`roles.${this._userID}`, '==', 'owner')
+                ref => ref.where(`roles.${userID}`, '==', 'owner')
             ).stateChanges()
                 .pipe(
                 merge(
                     this._afStore.collection<Prompt>('prompts',
-                        ref => ref.where(`roles.${this._userID}`, '==', 'writer')
+                        ref => ref.where(`roles.${userID}`, '==', 'writer')
                     ).stateChanges()
                 )).pipe(
                 merge(
                     this._afStore.collection<Prompt>('prompts',
-                        ref => ref.where(`roles.${this._userID}`, '==', 'reader')
+                        ref => ref.where(`roles.${userID}`, '==', 'reader')
                     ).stateChanges()
                 ));
         }),

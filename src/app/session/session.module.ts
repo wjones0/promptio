@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
-import { reducers } from './store';
+import { reducers, effects } from './store';
 
 import { PromptCommonModule } from '../prompt-common/prompt-common.module';
 
@@ -14,6 +15,7 @@ import { SessionComponent } from './session/session.component';
   imports: [
     CommonModule,
     StoreModule.forFeature('sessionModule', reducers),
+    EffectsModule.forFeature(effects),
     PromptCommonModule,
     SessionRoutingModule
   ],
