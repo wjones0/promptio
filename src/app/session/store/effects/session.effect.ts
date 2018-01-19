@@ -5,11 +5,13 @@ import { Effect, Actions } from '@ngrx/effects';
 import { ROUTER_NAVIGATION } from '@ngrx/router-store';
 
 import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 import { switchMap, map } from 'rxjs/operators';
 
 import * as fromRoot from '@rootStore';
 import * as fromSessions from '../reducers';
 import * as SessionActions from '../actions/session.action';
+import * as PromptActions from '../actions/prompt.action';
 
 import { SessionService } from '../../services';
 
@@ -40,5 +42,13 @@ export class SessionEffects {
                 );
         }),
     );
+
+    // @Effect()
+    // sessionLoaded$: Observable<Action> = this._actions$.ofType(SessionActions.SESSION_LOADED).pipe(
+    //     map(action => action as SessionActions.SessionLoaded),
+    //     switchMap(action => {
+    //         return of(new  );
+    //     })
+    // );
 
 }

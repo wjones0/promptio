@@ -8,7 +8,7 @@ import { reducers, effects } from './store';
 
 import { PromptCommonModule } from '../prompt-common/prompt-common.module';
 
-import { SessionService } from './services';
+import { SessionService, PromptService } from './services';
 
 import { SessionRoutingModule } from './session-routing.module';
 import { SessionComponent } from './session/session.component';
@@ -25,7 +25,8 @@ import { SessionComponent } from './session/session.component';
     SessionComponent
   ],
   providers: [
-    SessionService
+    SessionService,
+    PromptService
   ]
 })
 export class SessionModule { }

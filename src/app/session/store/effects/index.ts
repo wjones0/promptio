@@ -1,7 +1,9 @@
 import { SessionEffects } from './session.effect';
+import { PromptEffects } from './prompt.effect';
 
 export const effects: any[] = [
-    SessionEffects
+    SessionEffects,
+    PromptEffects
 ];
 
 export * from './session.effect';
