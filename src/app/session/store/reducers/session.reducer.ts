@@ -4,10 +4,14 @@ import { Session } from '@models/session';
 
 export interface SessionState {
     session: Session;
+    position: number;
+    rate: number;
 }
 
 export const initialState: SessionState = {
-    session: null
+    session: null,
+    position: 0,
+    rate: 0
 };
 
 export function reducer(state = initialState, action: SessionActions.SessionAction): SessionState {
@@ -23,6 +27,13 @@ export function reducer(state = initialState, action: SessionActions.SessionActi
             return {
                 ...state,
                 session: action.payload
+            };
+        }
+
+        case (SessionActions.SCROLL_SESSION): {
+            return {
+                ...state,
+                position: state.position + 1
             };
         }
     }

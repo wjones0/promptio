@@ -36,7 +36,7 @@ describe('Session Selectors', () => {
                 result = value;
             });
 
-        expect(result).toEqual({ session: null });
+        expect(result).toEqual({ session: null, position: 0, rate: 0 });
 
         const session: Session = {
             id: 'sessionid',
@@ -49,7 +49,9 @@ describe('Session Selectors', () => {
         store.dispatch(new fromActions.SessionLoaded(session));
 
         expect(result).toEqual({
-            session
+            session,
+            position: 0,
+            rate: 0
         });
     });
 
@@ -75,6 +77,30 @@ describe('Session Selectors', () => {
         store.dispatch(new fromActions.SessionLoaded(session));
 
         expect(result).toEqual(session);
+    });
+
+    it('should have a current position selector', () => {
+        let result;
+
+        store
+            .select(fromSelectors.selectCurrentPosition)
+            .subscribe((value) => {
+                result = value;
+            });
+
+        expect(result).toBe(0);
+    });
+
+    it('should have a current rate selector', () => {
+        let result;
+
+        store
+            .select(fromSelectors.selectCurrentRate)
+            .subscribe((value) => {
+                result = value;
+            });
+
+        expect(result).toBe(0);
     });
 
 });

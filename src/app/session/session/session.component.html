@@ -1,4 +1,5 @@
 <pro-topnav></pro-topnav>
 
-{{session$ | async | json}}
-<hr/> {{prompt$ | async | json}}
+<div class="container">
+    <div class="prompt-text" #promptcontent>{{(prompt$ | async)?.content}}</div>
+</div>

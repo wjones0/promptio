@@ -40,7 +40,23 @@ describe('Session Reducer', () => {
         const state = fromSessions.reducer(initialState, action);
 
         expect(state).toEqual({
-            session
+            session,
+            position: 0,
+            rate: 0
+        });
+    });
+
+    it('should increase the scroll point for the scroll session action', () => {
+        const { initialState } = fromSessions;
+
+        const action = new fromActions.ScrollSession();
+
+        const state = fromSessions.reducer(initialState, action);
+
+        expect(state).toEqual({
+            session: null,
+            position: 1,
+            rate: 0
         });
     });
 

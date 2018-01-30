@@ -29,4 +29,12 @@ describe('Session Actions', () => {
         });
     });
 
+    it('should create a Scroll Session action', () => {
+        const action = new fromSessions.ScrollSession();
+
+        expect({ ...action }).toEqual({
+            type: fromSessions.SCROLL_SESSION
+        });
+    });
+
 });
