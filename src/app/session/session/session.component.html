@@ -1,5 +1,3 @@
 <pro-topnav></pro-topnav>
 
-<div class="container">
-    <div class="prompt-text" #promptcontent>{{(prompt$ | async)?.content}}</div>
-</div>
+<pro-viewer [prompt]="(prompt$ | async)" [scrollPosY]="scrollPosY" (scrollMax)="maxScrollReached()"></pro-viewer>

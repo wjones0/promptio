@@ -12,6 +12,7 @@ import { SessionService, PromptService } from './services';
 
 import { SessionRoutingModule } from './session-routing.module';
 import { SessionComponent } from './session/session.component';
+import { ViewerComponent } from './components/viewer/viewer.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { SessionComponent } from './session/session.component';
     SessionRoutingModule
   ],
   declarations: [
-    SessionComponent
+    SessionComponent,
+    ViewerComponent
   ],
   providers: [
     SessionService,

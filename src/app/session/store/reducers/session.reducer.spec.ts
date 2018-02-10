@@ -60,4 +60,22 @@ describe('Session Reducer', () => {
         });
     });
 
+    it('should set the rate to 0 for the stop scroll action', () => {
+        const initialState = {
+            session: null,
+            position: 0,
+            rate: 10
+        };
+
+        const action = new fromActions.StopScroll();
+
+        const state = fromSessions.reducer(initialState, action);
+
+        expect(state).toEqual({
+            session: null,
+            position: 0,
+            rate: 0
+        });
+    });
+
 });

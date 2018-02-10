@@ -8,6 +8,7 @@ import * as fromSessions from '../store';
 import { PromptCommonModule } from '../../prompt-common/prompt-common.module';
 
 import { SessionComponent } from './session.component';
+import { ViewerComponent } from '../components/viewer/viewer.component';
 
 describe('SessionComponent', () => {
   let component: SessionComponent;
@@ -21,6 +22,7 @@ describe('SessionComponent', () => {
         StoreModule.forFeature('sessionModule', { ...fromSessions.reducers }),
       ],
       declarations: [
+        ViewerComponent,
         SessionComponent
       ]
     })

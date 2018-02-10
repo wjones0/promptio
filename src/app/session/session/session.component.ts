@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -8,7 +8,6 @@ import { Store } from '@ngrx/store';
 
 import * as fromStore from '../store';
 
-import { Session } from '@models/session';
 import { Prompt } from '@models/prompt';
 
 @Component({
@@ -18,20 +17,17 @@ import { Prompt } from '@models/prompt';
 })
 export class SessionComponent implements OnInit, OnDestroy {
 
-  public session$: Observable<Session>;
   public prompt$: Observable<Prompt>;
 
   private rateSub: Subscription;
-
   public scrollPosY: number;
-
-  @ViewChild('promptcontent') promptEl: ElementRef;
 
   constructor(private _store: Store<fromStore.SessionModuleState>) { }
 
   ngOnInit() {
-    this.session$ = this._store.select(fromStore.selectCurrentSession);
     this.prompt$ = this._store.select(fromStore.selectCurrentPrompt);
+
+    this.scrollPosY = 0;
 
     this._store.select(fromStore.selectCurrentRate).subscribe((rate: number) => {
       if (this.rateSub) {
@@ -39,11 +35,13 @@ export class SessionComponent implements OnInit, OnDestroy {
       }
 
       if (rate !== 0) {
-        this.rateSub = Observable.interval(rate).subscribe(() => {
-          this.promptEl.nativeElement.scrollTo(0, ++this.scrollPosY);
-        });
+        this.rateSub = Observable.interval(rate).subscribe(() => ++this.scrollPosY);
       }
     });
+  }
+
+  maxScrollReached() {
+    this._store.dispatch(new fromStore.StopScroll());
   }
 
   ngOnDestroy() {

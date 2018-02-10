@@ -37,4 +37,12 @@ describe('Session Actions', () => {
         });
     });
 
+    it('should create a stop scroll session action', () => {
+        const action = new fromSessions.StopScroll();
+
+        expect({ ...action }).toEqual({
+            type: fromSessions.STOP_SCROLL
+        });
+    });
+
 });

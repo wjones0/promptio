@@ -36,6 +36,13 @@ export function reducer(state = initialState, action: SessionActions.SessionActi
                 position: state.position + 1
             };
         }
+
+        case (SessionActions.STOP_SCROLL): {
+            return {
+                ...state,
+                rate: 0
+            };
+        }
     }
 
     return state;
