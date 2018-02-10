@@ -36,7 +36,7 @@ describe('Session Selectors', () => {
                 result = value;
             });
 
-        expect(result).toEqual({ session: null, position: 0, rate: 0 });
+        expect(result).toEqual({ session: null, position: 0, rate: 0, role: '' });
 
         const session: Session = {
             id: 'sessionid',
@@ -51,7 +51,8 @@ describe('Session Selectors', () => {
         expect(result).toEqual({
             session,
             position: 0,
-            rate: 0
+            rate: 0,
+            role: ''
         });
     });
 
@@ -101,6 +102,22 @@ describe('Session Selectors', () => {
             });
 
         expect(result).toBe(0);
+    });
+
+    it('should have a role selector', () => {
+        let result;
+
+        store
+            .select(fromSelectors.selectRole)
+            .subscribe((value) => {
+                result = value;
+            });
+
+        expect(result).toEqual('');
+
+        store.dispatch(new fromActions.SelectRole('viewer'));
+
+        expect(result).toEqual('viewer');
     });
 
 });

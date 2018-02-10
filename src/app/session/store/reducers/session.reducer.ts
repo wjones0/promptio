@@ -6,12 +6,14 @@ export interface SessionState {
     session: Session;
     position: number;
     rate: number;
+    role: string;
 }
 
 export const initialState: SessionState = {
     session: null,
     position: 0,
-    rate: 0
+    rate: 0,
+    role: ''
 };
 
 export function reducer(state = initialState, action: SessionActions.SessionAction): SessionState {
@@ -41,6 +43,13 @@ export function reducer(state = initialState, action: SessionActions.SessionActi
             return {
                 ...state,
                 rate: 0
+            };
+        }
+
+        case (SessionActions.SELECT_ROLE): {
+            return {
+                ...state,
+                role: action.payload
             };
         }
     }

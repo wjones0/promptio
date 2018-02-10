@@ -21,3 +21,8 @@ export const selectCurrentRate = createSelector(
     selectSessionState,
     (sessionState) => sessionState.rate
 );
+
+export const selectRole = createSelector(
+    selectSessionState,
+    (sessionState) => sessionState.role
+);

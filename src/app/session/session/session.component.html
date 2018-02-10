@@ -1,3 +1,9 @@
 <pro-topnav></pro-topnav>
 
-<pro-viewer [prompt]="(prompt$ | async)" [scrollPosY]="scrollPosY" (scrollMax)="maxScrollReached()"></pro-viewer>
+<div *ngIf="(role$ | async) as role; else roleSelect">
+    <pro-viewer *ngIf="role==='viewer'" [prompt]="(prompt$ | async)" [scrollPosY]="scrollPosY" (scrollMax)="maxScrollReached()"></pro-viewer>
+</div>
+
+<ng-template #roleSelect>
+    <pro-role-selector (roleSelected)="selectRole($event)"></pro-role-selector>
+</ng-template>

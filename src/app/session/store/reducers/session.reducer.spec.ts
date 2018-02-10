@@ -42,7 +42,8 @@ describe('Session Reducer', () => {
         expect(state).toEqual({
             session,
             position: 0,
-            rate: 0
+            rate: 0,
+            role: ''
         });
     });
 
@@ -56,7 +57,8 @@ describe('Session Reducer', () => {
         expect(state).toEqual({
             session: null,
             position: 1,
-            rate: 0
+            rate: 0,
+            role: ''
         });
     });
 
@@ -64,7 +66,8 @@ describe('Session Reducer', () => {
         const initialState = {
             session: null,
             position: 0,
-            rate: 10
+            rate: 10,
+            role: ''
         };
 
         const action = new fromActions.StopScroll();
@@ -74,7 +77,23 @@ describe('Session Reducer', () => {
         expect(state).toEqual({
             session: null,
             position: 0,
-            rate: 0
+            rate: 0,
+            role: ''
+        });
+    });
+
+    it('should set the role in the set role action', () => {
+        const { initialState } = fromSessions;
+
+        const action = new fromActions.SelectRole('viewer');
+
+        const state = fromSessions.reducer(initialState, action);
+
+        expect(state).toEqual({
+            session: null,
+            position: 0,
+            rate: 0,
+            role: 'viewer'
         });
     });
 

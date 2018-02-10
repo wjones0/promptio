@@ -18,6 +18,7 @@ import { Prompt } from '@models/prompt';
 export class SessionComponent implements OnInit, OnDestroy {
 
   public prompt$: Observable<Prompt>;
+  public role$: Observable<string>;
 
   private rateSub: Subscription;
   public scrollPosY: number;
@@ -26,6 +27,7 @@ export class SessionComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.prompt$ = this._store.select(fromStore.selectCurrentPrompt);
+    this.role$ = this._store.select(fromStore.selectRole);
 
     this.scrollPosY = 0;
 
@@ -42,6 +44,10 @@ export class SessionComponent implements OnInit, OnDestroy {
 
   maxScrollReached() {
     this._store.dispatch(new fromStore.StopScroll());
+  }
+
+  selectRole(role: string) {
+    this._store.dispatch(new fromStore.SelectRole(role));
   }
 
   ngOnDestroy() {

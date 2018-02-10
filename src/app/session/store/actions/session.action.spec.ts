@@ -45,4 +45,13 @@ describe('Session Actions', () => {
         });
     });
 
+    it('should create a select role action', () => {
+        const action = new fromSessions.SelectRole('viewer');
+
+        expect({ ...action }).toEqual({
+            type: fromSessions.SELECT_ROLE,
+            payload: 'viewer'
+        });
+    });
+
 });
