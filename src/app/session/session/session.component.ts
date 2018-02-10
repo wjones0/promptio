@@ -22,7 +22,6 @@ export class SessionComponent implements OnInit, OnDestroy {
   public prompt$: Observable<Prompt>;
 
   private rateSub: Subscription;
-  private scrollSub: Subscription;
 
   public scrollPosY: number;
 
@@ -34,10 +33,6 @@ export class SessionComponent implements OnInit, OnDestroy {
     this.session$ = this._store.select(fromStore.selectCurrentSession);
     this.prompt$ = this._store.select(fromStore.selectCurrentPrompt);
 
-    this.scrollSub = this._store.select(fromStore.selectCurrentPosition).subscribe((position: number) => {
-      this.scrollPosY = position;
-    });
-
     this._store.select(fromStore.selectCurrentRate).subscribe((rate: number) => {
       if (this.rateSub) {
         this.rateSub.unsubscribe();
@@ -45,8 +40,7 @@ export class SessionComponent implements OnInit, OnDestroy {
 
       if (rate !== 0) {
         this.rateSub = Observable.interval(rate).subscribe(() => {
-          this.promptEl.nativeElement.scrollTo(0, this.scrollPosY);
-          this._store.dispatch(new fromStore.ScrollSession());
+          this.promptEl.nativeElement.scrollTo(0, ++this.scrollPosY);
         });
       }
     });
@@ -56,8 +50,6 @@ export class SessionComponent implements OnInit, OnDestroy {
     if (this.rateSub) {
       this.rateSub.unsubscribe();
     }
-
-    this.scrollSub.unsubscribe();
   }
 
 }
