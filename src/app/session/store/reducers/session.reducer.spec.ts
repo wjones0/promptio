@@ -82,6 +82,29 @@ describe('Session Reducer', () => {
         });
     });
 
+    it('should preserve state for scroll faster session action', () => {
+        const { initialState } = fromSessions;
+        const action = new fromActions.ScrollFaster();
+
+        const state = fromSessions.reducer(initialState, action);
+
+        expect(state).toEqual({
+            ...initialState
+        });
+    });
+
+    it('should preserve state for scroll slower session action', () => {
+        const { initialState } = fromSessions;
+        const action = new fromActions.ScrollSlower();
+
+        const state = fromSessions.reducer(initialState, action);
+
+        expect(state).toEqual({
+            ...initialState
+        });
+    });
+
+
     it('should set the role in the set role action', () => {
         const { initialState } = fromSessions;
 

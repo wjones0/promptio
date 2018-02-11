@@ -46,6 +46,18 @@ export function reducer(state = initialState, action: SessionActions.SessionActi
             };
         }
 
+        case (SessionActions.SCROLL_FASTER): {
+            return {
+                ...state
+            };
+        }
+
+        case (SessionActions.SCROLL_SLOWER): {
+            return {
+                ...state
+            };
+        }
+
         case (SessionActions.SELECT_ROLE): {
             return {
                 ...state,

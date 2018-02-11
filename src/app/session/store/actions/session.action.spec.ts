@@ -45,6 +45,22 @@ describe('Session Actions', () => {
         });
     });
 
+    it('should create a scroll faster session action', () => {
+        const action = new fromSessions.ScrollFaster();
+
+        expect({ ...action }).toEqual({
+            type: fromSessions.SCROLL_FASTER
+        });
+    });
+
+    it('should create a scroll slower session action', () => {
+        const action = new fromSessions.ScrollSlower();
+
+        expect({ ...action }).toEqual({
+            type: fromSessions.SCROLL_SLOWER
+        });
+    });
+
     it('should create a select role action', () => {
         const action = new fromSessions.SelectRole('viewer');
 
