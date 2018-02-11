@@ -29,6 +29,7 @@ describe('Session Reducer', () => {
         const { initialState } = fromSessions;
         const session: Session = {
             id: 'sessionid',
+            rate: 0,
             promptId: 'promptid',
             roles: {
                 someuserid: 'owner'
@@ -42,7 +43,6 @@ describe('Session Reducer', () => {
         expect(state).toEqual({
             session,
             position: 0,
-            rate: 0,
             role: ''
         });
     });
@@ -57,28 +57,18 @@ describe('Session Reducer', () => {
         expect(state).toEqual({
             session: null,
             position: 1,
-            rate: 0,
             role: ''
         });
     });
 
-    it('should set the rate to 0 for the stop scroll action', () => {
-        const initialState = {
-            session: null,
-            position: 0,
-            rate: 10,
-            role: ''
-        };
-
+    it('should preserve state for the stop scroll action', () => {
+        const { initialState } = fromSessions;
         const action = new fromActions.StopScroll();
 
         const state = fromSessions.reducer(initialState, action);
 
         expect(state).toEqual({
-            session: null,
-            position: 0,
-            rate: 0,
-            role: ''
+            ...initialState
         });
     });
 
@@ -115,7 +105,6 @@ describe('Session Reducer', () => {
         expect(state).toEqual({
             session: null,
             position: 0,
-            rate: 0,
             role: 'viewer'
         });
     });

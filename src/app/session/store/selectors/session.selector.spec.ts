@@ -36,10 +36,15 @@ describe('Session Selectors', () => {
                 result = value;
             });
 
-        expect(result).toEqual({ session: null, position: 0, rate: 0, role: '' });
+        expect(result).toEqual({
+            session: null,
+            position: 0,
+            role: ''
+        });
 
         const session: Session = {
             id: 'sessionid',
+            rate: 0,
             promptId: 'promptid',
             roles: {
                 someuserid: 'owner'
@@ -51,7 +56,6 @@ describe('Session Selectors', () => {
         expect(result).toEqual({
             session,
             position: 0,
-            rate: 0,
             role: ''
         });
     });
@@ -69,6 +73,7 @@ describe('Session Selectors', () => {
 
         const session: Session = {
             id: 'sessionid',
+            rate: 0,
             promptId: 'promptid',
             roles: {
                 someuserid: 'owner'

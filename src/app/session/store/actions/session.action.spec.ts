@@ -15,6 +15,7 @@ describe('Session Actions', () => {
     it('should create an Added Session action', () => {
         const session: Session = {
             id: 'somelongid',
+            rate: 0,
             promptId: 'anotherlongid',
             roles: {
                 someuserid: 'owner'

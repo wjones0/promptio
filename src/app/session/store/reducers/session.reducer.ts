@@ -5,14 +5,12 @@ import { Session } from '@models/session';
 export interface SessionState {
     session: Session;
     position: number;
-    rate: number;
     role: string;
 }
 
 export const initialState: SessionState = {
     session: null,
     position: 0,
-    rate: 0,
     role: ''
 };
 
@@ -41,8 +39,7 @@ export function reducer(state = initialState, action: SessionActions.SessionActi
 
         case (SessionActions.STOP_SCROLL): {
             return {
-                ...state,
-                rate: 0
+                ...state
             };
         }
 

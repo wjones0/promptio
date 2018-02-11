@@ -18,8 +18,8 @@ export const selectCurrentPosition = createSelector(
 );
 
 export const selectCurrentRate = createSelector(
-    selectSessionState,
-    (sessionState) => sessionState.rate
+    selectCurrentSession,
+    (session) => session ? session.rate : 0
 );
 
 export const selectRole = createSelector(

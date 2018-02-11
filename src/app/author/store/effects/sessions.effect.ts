@@ -32,6 +32,7 @@ export class SessionEffects {
             const role = {};
             role[user.authID] = 'owner';
             const newSession: Session = {
+                rate: 0,
                 promptId: action.payload,
                 roles: role
             };
