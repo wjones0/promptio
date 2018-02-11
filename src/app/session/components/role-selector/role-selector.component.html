@@ -1,10 +1,10 @@
 <div class="container">
   <div class="vertical-group">
-    <mat-card (click)="selectRole('viewer')">
-      <mat-card-title>Viewer</mat-card-title>
-    </mat-card>
-    <mat-card>
-      <mat-card-title>Controller</mat-card-title>
-    </mat-card>
+    <button mat-raised-button color="accent" (click)="selectRole('viewer')">
+      Viewer
+    </button>
+    <button mat-raised-button color="accent" (click)="selectRole('controller')">
+      Controller
+    </button>
   </div>
 </div>

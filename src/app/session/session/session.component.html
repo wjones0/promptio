@@ -2,6 +2,7 @@
 
 <div *ngIf="(role$ | async) as role; else roleSelect">
     <pro-viewer *ngIf="role==='viewer'" [prompt]="(prompt$ | async)" [scrollPosY]="scrollPosY" (scrollMax)="maxScrollReached()"></pro-viewer>
+    <pro-controller *ngIf="role==='controller'" (rateChange)="rateChange($event)"></pro-controller>
 </div>
 
 <ng-template #roleSelect>

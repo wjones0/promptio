@@ -1,10 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import {
-  MatCardModule,
-} from '@angular/material';
-
 import { StoreModule, Store } from '@ngrx/store';
 
 import * as fromRoot from '@rootStore';
@@ -14,6 +10,7 @@ import { PromptCommonModule } from '../../prompt-common/prompt-common.module';
 
 import { SessionComponent } from './session.component';
 import { ViewerComponent } from '../components/viewer/viewer.component';
+import { ControllerComponent } from '../components/controller/controller.component';
 import { RoleSelectorComponent } from '../components/role-selector/role-selector.component';
 
 describe('SessionComponent', () => {
@@ -23,13 +20,13 @@ describe('SessionComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        MatCardModule,
         PromptCommonModule,
         StoreModule.forRoot(fromRoot.reducers),
         StoreModule.forFeature('sessionModule', { ...fromSessions.reducers }),
       ],
       declarations: [
         ViewerComponent,
+        ControllerComponent,
         RoleSelectorComponent,
         SessionComponent
       ]

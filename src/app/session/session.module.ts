@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
-  MatCardModule
+  MatButtonModule,
 } from '@angular/material';
 
 import { StoreModule } from '@ngrx/store';
@@ -18,11 +18,12 @@ import { SessionRoutingModule } from './session-routing.module';
 import { SessionComponent } from './session/session.component';
 import { ViewerComponent } from './components/viewer/viewer.component';
 import { RoleSelectorComponent } from './components/role-selector/role-selector.component';
+import { ControllerComponent } from './components/controller/controller.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    MatCardModule,
+    MatButtonModule,
     StoreModule.forFeature('sessionModule', reducers),
     EffectsModule.forFeature(effects),
     PromptCommonModule,
@@ -31,7 +32,8 @@ import { RoleSelectorComponent } from './components/role-selector/role-selector.
   declarations: [
     SessionComponent,
     ViewerComponent,
-    RoleSelectorComponent
+    RoleSelectorComponent,
+    ControllerComponent
   ],
   providers: [
     SessionService,

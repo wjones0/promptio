@@ -46,6 +46,9 @@ export class SessionComponent implements OnInit, OnDestroy {
     this._store.dispatch(new fromStore.StopScroll());
   }
 
+  rateChange(change: string) {
+  }
+
   selectRole(role: string) {
     this._store.dispatch(new fromStore.SelectRole(role));
   }
