@@ -31,12 +31,12 @@ export class PromptEffects {
         switchMap((promptid: string) => {
             return this._promptService.getSinglePromptActionStream(promptid)
                 .pipe(
-                map(promptdoc => {
-                    return {
-                        type: `[Prompt] ${promptdoc.type}`,
-                        payload: promptdoc.payload.data()
-                    };
-                })
+                    map(promptdoc => {
+                        return {
+                            type: `[Prompt] ${promptdoc.type}`,
+                            payload: promptdoc.payload.data()
+                        };
+                    })
                 );
         }),
     );

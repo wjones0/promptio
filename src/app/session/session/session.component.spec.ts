@@ -61,4 +61,17 @@ describe('SessionComponent', () => {
     expect(de).toBeTruthy();
 
   });
+
+  it('should show the controller when the role is controller', () => {
+    let de = fixture.debugElement.query(By.css('pro-controller'));
+    expect(de).toBeFalsy();
+
+    const store = fixture.debugElement.injector.get(Store);
+    store.dispatch(new fromSessions.SelectRole('controller'));
+    fixture.detectChanges();
+
+    de = fixture.debugElement.query(By.css('pro-controller'));
+    expect(de).toBeTruthy();
+
+  });
 });

@@ -45,6 +45,7 @@ service cloud.firestore {
       }
 
       allow create: if isValidNewSession();
+      allow update: if isOneOfRoles(['owner']);
       allow delete: if isOneOfRoles(['owner']);
       allow get: if true;
     }

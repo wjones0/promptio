@@ -36,8 +36,11 @@ export class SessionComponent implements OnInit, OnDestroy {
         this.rateSub.unsubscribe();
       }
 
-      if (rate !== 0) {
+      // temporary rate until i can change rate to an interval
+      if (rate > 0) {
         this.rateSub = Observable.interval(rate).subscribe(() => ++this.scrollPosY);
+      } else if (rate < 0) {
+        this.rateSub = Observable.interval(rate).subscribe(() => --this.scrollPosY);
       }
     });
   }
@@ -47,6 +50,11 @@ export class SessionComponent implements OnInit, OnDestroy {
   }
 
   rateChange(change: string) {
+    if (change === '+') {
+      this._store.dispatch(new fromStore.ScrollFaster());
+    } else if (change === '-') {
+      this._store.dispatch(new fromStore.ScrollSlower());
+    }
   }
 
   selectRole(role: string) {
